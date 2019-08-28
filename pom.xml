@@ -67,6 +67,14 @@
         </dependency>
 
 <!--        /数据库连接-->
+
+<!--        lombok 自动生成get/set-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
 

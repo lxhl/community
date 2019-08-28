@@ -1,6 +1,7 @@
 package com.lxh.community.config;
 
 import com.lxh.community.interceptor.LoginInterceptor;
+import com.lxh.community.interceptor.PublishInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -18,11 +19,11 @@ public class MyWebConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("index");
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor).addPathPatterns("/");
+        registry.addInterceptor(new PublishInterceptor()).addPathPatterns("/publish");
     }
 }

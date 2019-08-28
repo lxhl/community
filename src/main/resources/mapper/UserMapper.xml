@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxh.community.mapper.UserMapper">
+    <resultMap id="UserResultMap" type="com.lxh.community.model.User">
+        <id column="id" property="id"/>
+    </resultMap>
+    
+    <select id="FindByToken" parameterType="String" resultMap="UserResultMap">
+        SELECT
+          `id` ,
+          `account_id` accountId,
+          `name`,
+          `token`,
+          `gmt_create` gmtCreate,
+          `gmt_modified` gmtModified,
+          `avatar`
+        FROM
+          `user`
+          where token=#{token}
+    </select>
+</mapper>
