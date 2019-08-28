@@ -30,16 +30,17 @@
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li> <a href="https://github.com/login/oauth/authorize?client_id=d2f2b657efd24f4825f2&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登录</a></li>
+                <#if Session.user??><#else><li> <a href="https://github.com/login/oauth/authorize?client_id=d2f2b657efd24f4825f2&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登录</a></li></#if>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">我 <span class="caret"></span></a>
+                       aria-expanded="false"><#if Session.user??>${Session.user.name}<#else>我
+                       </#if> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Action</a></li>
                         <li><a href="#">Another action</a></li>
                         <li><a href="#">Something else here</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
+                        <li><a href="/logout">注销</a></li>
                     </ul>
                 </li>
             </ul>
