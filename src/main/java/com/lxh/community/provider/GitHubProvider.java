@@ -13,6 +13,7 @@ import java.io.IOException;
 /**
  * @author LXH
  * @date 2019/8/28 -10:17
+ * 提供第三方框架的服务，采用okhttp模仿浏览器访问服务器的过程
  */
 @Component
 public class GitHubProvider {
