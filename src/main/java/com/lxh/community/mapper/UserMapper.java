@@ -16,4 +16,8 @@ public interface UserMapper {
     @Insert("insert into user(account_id,name,token,gmt_create,gmt_modified,avatar) values(#{accountId},#{name},#{token},#{gmtCreate},#{gmtModified},#{avatar})")
      void insert(User user);
     User FindByToken(String token);
+    @Select("select id from user where account_id=#{AccountId}")
+    User FindByAccountId(Long AccountId);
+
+    void updateToken(User user);
 }

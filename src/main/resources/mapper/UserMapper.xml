@@ -18,4 +18,13 @@
           `user`
           where token=#{token}
     </select>
+
+    <update id="updateToken" parameterType="com.lxh.community.model.User">
+        UPDATE
+        `user`
+        SET
+        `token` = #{token},
+        `gmt_modified` = #{gmtModified}
+        WHERE `account_id` = #{accountId} ;
+    </update>
 </mapper>

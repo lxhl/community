@@ -1,5 +1,7 @@
 package com.lxh.community;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lxh.community.dto.QuestionDTO;
 import com.lxh.community.mapper.QuestionDTOMapper;
 import com.lxh.community.mapper.QuestionMapper;
@@ -10,15 +12,21 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
+@Rollback
 public class CommunityApplicationTests {
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private QuestionMapper questionMapper;
 
     @Autowired
     private QuestionDTOMapper questionDTOMapper;
@@ -27,9 +35,15 @@ public class CommunityApplicationTests {
         List<QuestionDTO> list = questionDTOMapper.selectList();
         System.out.println(list);
     }
+
     @Test
     public void test(){
-        User user = userMapper.FindByToken("3b26710f-3bd3-47b2-bc92-479f19667732");
-        System.out.println(user);
+        PageHelper.startPage(1,3);
+        PageInfo<Question> pageInfo=new PageInfo<>(questionMapper.list());
+        List<Question> list = pageInfo.getList();
+        for (Question question : list) {
+            System.out.println(question.toString());
+        }
+
     }
 }

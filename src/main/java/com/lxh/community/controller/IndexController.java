@@ -1,13 +1,18 @@
 package com.lxh.community.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lxh.community.dto.QuestionDTO;
+import com.lxh.community.mapper.QuestionDTOMapper;
 import com.lxh.community.mapper.QuestionMapper;
 import com.lxh.community.model.Question;
 import com.lxh.community.service.QuestionService;
+import freemarker.ext.beans.StringModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -21,9 +26,15 @@ public class IndexController {
     private QuestionService questionService;
     @Autowired
     private QuestionMapper questionMapper;
+    @Autowired
+    private QuestionDTOMapper questionDTOMapper;
     @GetMapping("/")
-    public String index(Model model){
-        List<QuestionDTO> questionDTOList = questionService.list();
+    public String index(@RequestParam(value = "pageNumber",defaultValue = "1") String pageNumber,
+                        @RequestParam(value = "pageSize",defaultValue = "3") String pageSize,
+                        Model model){
+        PageHelper.startPage(Integer.parseInt(pageNumber),Integer.parseInt(pageSize));
+        PageInfo<QuestionDTO> pageInfo = new PageInfo<>(questionDTOMapper.selectList());
+        List<QuestionDTO> questionDTOList = pageInfo.getList();
         model.addAttribute("list",questionDTOList);
         return "index";
     }

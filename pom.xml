@@ -47,7 +47,7 @@
             <version>1.2.58</version>
         </dependency>
 
-<!--        数据库连接-->
+        <!--        数据库连接-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
@@ -66,14 +66,22 @@
             <version>5.1.47</version>
         </dependency>
 
-<!--        /数据库连接-->
+        <!--        /数据库连接-->
 
-<!--        lombok 自动生成get/set-->
+        <!--        lombok 自动生成get/set-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.8</version>
             <scope>provided</scope>
+        </dependency>
+        <!--        lombok 自动生成get/set-->
+
+<!--        分页助手-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.5</version>
         </dependency>
     </dependencies>
 

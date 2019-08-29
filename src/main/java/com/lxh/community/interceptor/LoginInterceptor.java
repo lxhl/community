@@ -3,7 +3,6 @@ package com.lxh.community.interceptor;
 import com.lxh.community.mapper.UserMapper;
 import com.lxh.community.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
