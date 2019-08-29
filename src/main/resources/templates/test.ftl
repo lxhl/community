@@ -9,11 +9,10 @@
 </head>
 <body>
 <#include "navbar.ftl">
-
-<#if error??><div class="main" style="padding-left: 30px;color: red"><h2>${error}</h2></#if></div>
 <div class="container-fluid main">
-    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12"">
-    <h2> <span class=" glyphicon glyphicon-list" aria-hidden="true"></span>发现</h2>
+    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12"
+    ">
+    <h2><span class=" glyphicon glyphicon-list" aria-hidden="true"></span>发现</h2>
     <hr/>
     <#if pageInfo??>
         <#list pageInfo.list as question>

@@ -30,12 +30,11 @@ public class IndexController {
     private QuestionDTOMapper questionDTOMapper;
     @GetMapping("/")
     public String index(@RequestParam(value = "pageNumber",defaultValue = "1") String pageNumber,
-                        @RequestParam(value = "pageSize",defaultValue = "3") String pageSize,
+                        @RequestParam(value = "pageSize",defaultValue = "5") String pageSize,
                         Model model){
         PageHelper.startPage(Integer.parseInt(pageNumber),Integer.parseInt(pageSize));
-        PageInfo<QuestionDTO> pageInfo = new PageInfo<>(questionDTOMapper.selectList());
-        List<QuestionDTO> questionDTOList = pageInfo.getList();
-        model.addAttribute("list",questionDTOList);
+        PageInfo<QuestionDTO> pageInfo=new PageInfo<>(questionDTOMapper.selectList(),5);
+        model.addAttribute("pageInfo",pageInfo);
         return "index";
     }
 }
