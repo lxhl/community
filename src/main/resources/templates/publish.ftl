@@ -15,18 +15,21 @@
         <hr/>
     <#if error??><div class="alert alert-danger" role="alert"style="font-size: medium">${error}</div></#if>
     <#if success??><div class="alert alert-success" role="alert"style="font-size: medium">${success}</div></#if>
-        <form action="/publish" method="post">
+    <form action="/publish" method="post">
+        <#if question??&&question.id??>
+        <input type="hidden" name="id" value="${question.id}">
+            </#if>
             <div class="form-group">
                 <label for="title">问题表调（简单扼要）</label>
-                <input type="text" class="form-control" id="title" name="title" placeholder="问题标题。。。" <#if title??>value="${title}" </#if>>
+                <input type="text" class="form-control" id="title" name="title" placeholder="问题标题。。。" <#if question??&&question.title??>value="${question.title}" </#if>>
             </div>
             <div class="form-group">
                 <label for="description">问题补充（必填，请参照右侧提示）</label>
-                <textarea name="description" id="description" cols="30" rows="10" class="form-control"><#if description??>${description}</#if></textarea>
+                <textarea name="description" id="description" cols="30" rows="10" class="form-control"><#if question??&&question.description??>${question.description}</#if></textarea>
             </div>
             <div class="form-group">
                 <label for="tag">添加标签</label>
-                <input type="text" class="form-control" id="tag" name="tag" placeholder="输入标签以，号隔开" <#if tag??>value="${tag}" </#if>>
+                <input type="text" class="form-control" id="tag" name="tag" placeholder="输入标签以，号隔开" <#if question??&&question.tag??>value="${question.tag}" </#if>>
             </div>
             <button type="submit" class="btn btn-success ">发布</button>
         </form>

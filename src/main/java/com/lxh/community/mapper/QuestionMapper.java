@@ -19,4 +19,8 @@ public interface QuestionMapper {
     List<Question> list();
     @Select("select count(id) from question")
     Integer count();
+    @Select("select * from question where id =#{id}")
+    Question selectById(Integer id);
+
+    void update(Question question);
 }

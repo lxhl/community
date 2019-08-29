@@ -29,4 +29,16 @@
            #{tag}
           ) ;
     </insert>
+
+    <update id="update" parameterType="com.lxh.community.model.Question">
+        update
+        `question`
+        set
+          `title` = #{title},
+          `description` = #{description},
+          `gmt_modified`= #{gmtModified},
+          `tag`= #{tag}
+          where id=#{id}
+    </update>
+
 </mapper>

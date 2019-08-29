@@ -25,7 +25,7 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading" style="color: #46b8da">${question.title}</h4>
+                    <h4 class="media-heading" style="color: #46b8da"><a href="/question/${question.id}">${question.title}</a></h4>
                     点击查看视频<br>
                     <span class="text-color-999">${question.commentCount} 个评论 • ${question.viewCount} 次浏览 • ${question.likeCount} 次点赞 • 更新时间${(question.gmtModified)?number_to_datetime?string('yyyy-MM-dd')}• 发布时间${(question.gmtCreate)?number_to_datetime?string('yyyy-MM-dd')}</span>
                 </div>
@@ -34,20 +34,20 @@
         </#list>
         <nav aria-label="Page navigation">
             <ul class="pagination">
-                <#if pageInfo.startRow!=pageInfo.firstPage>
+                <#if pageInfo.navigateFirstPage!=1>
                     <li>
-                        <a href="/pageInfo?pageNumber=${pageInfo.firstPage}" aria-label="Previous">
+                        <a href="/?pageNumber=${pageInfo.firstPage}" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
                 </#if>
                 <#list pageInfo.navigatepageNums as page>
-                    <li><a href="/pageInfo?pageNumber=${page}">${page}</a></li>
+                    <li><a href="/?pageNumber=${page}">${page}</a></li>
                 </#list>
 
-                <#if pageInfo.endRow!=pageInfo.lastPage>
+                <#if pageInfo.navigateLastPage!=pageInfo.pages>
                     <li>
-                        <a href="/pageInfo?pageNumber=${pageInfo.lastPage}" aria-label="Previous">
+                        <a href="/?pageNumber=${pageInfo.lastPage}" aria-label="Previous">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>

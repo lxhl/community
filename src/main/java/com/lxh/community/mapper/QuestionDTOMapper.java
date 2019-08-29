@@ -14,4 +14,6 @@ import java.util.List;
 @Repository
 public interface QuestionDTOMapper {
     List<QuestionDTO> selectList();
+    List<QuestionDTO> selectListByAccountId(Long accountId);
+    QuestionDTO selectByQuestionId(Integer id);
 }

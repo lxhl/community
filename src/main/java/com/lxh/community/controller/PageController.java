@@ -21,7 +21,7 @@ public class PageController {
     private QuestionDTOMapper questionDTOMapper;
     @GetMapping("/pageInfo")
     public String pageCount(@RequestParam(value = "pageNumber",defaultValue = "1") Integer pageNumber,
-                            @RequestParam(value = "pageSize",defaultValue = "2") Integer pageSize,
+                            @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize,
                             Model model){
         PageHelper.startPage(pageNumber,pageSize);
         PageInfo<QuestionDTO> pageInfo=new PageInfo<>(questionDTOMapper.selectList(),5);
@@ -32,7 +32,7 @@ public class PageController {
     @ResponseBody
     @GetMapping("/pageInfoJSON")
     public PageInfo<QuestionDTO> pageInfoJSON(@RequestParam(value = "pageNumber",defaultValue = "1") Integer pageNumber,
-                            @RequestParam(value = "pageSize",defaultValue = "2") Integer pageSize
+                            @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize
                             ){
         PageHelper.startPage(pageNumber,pageSize);
         PageInfo<QuestionDTO> pageInfo=new PageInfo<>(questionDTOMapper.selectList(),5);

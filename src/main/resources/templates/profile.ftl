@@ -13,24 +13,47 @@
     <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
     <h2> ${activeName}</h2>
     <hr/>
-<#--    <#if list??>-->
-<#--        <#list list as question>-->
-<#--            <div class="media">-->
-<#--                <div class="media-left">-->
-<#--                    <a href="#">-->
-<#--                        <img class="media-object img-rounded" src="${question.user.avatar}"  style="width: 40px;height: 40px" alt="头像">-->
-<#--                    </a>-->
-<#--                </div>-->
-<#--                <div class="media-body">-->
-<#--                    <h4 class="media-heading" style="color: #46b8da">${question.title}</h4>-->
-<#--                    点击查看视频<br>-->
-<#--                    <span class="text-color-999">${question.commentCount} 个评论 • ${question.viewCount} 次浏览 • ${question.likeCount} 次点赞 • 更新时间${(question.gmtModified)?number_to_datetime?string('yyyy-MM-dd')}• 发布时间${(question.gmtCreate)?number_to_datetime?string('yyyy-MM-dd')}</span>-->
-<#--                </div>-->
-<#--                <hr>-->
-<#--            </div>-->
+        <#if pageInfo??&&active="question">
+            <#list pageInfo.list as question>
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object img-rounded" src="${question.user.avatar}"
+                                 style="width: 40px;height: 40px" alt="头像">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading" style="color: #46b8da">${question.title}</h4>
+                        点击查看视频<br>
+                        <span class="text-color-999">${question.commentCount} 个评论 • ${question.viewCount} 次浏览 • ${question.likeCount} 次点赞 • 更新时间${(question.gmtModified)?number_to_datetime?string('yyyy-MM-dd')}• 发布时间${(question.gmtCreate)?number_to_datetime?string('yyyy-MM-dd')}</span>
+                    </div>
+                    <hr>
+                </div>
+            </#list>
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <#if pageInfo.navigateFirstPage!=1>
+                        <li>
+                            <a href="/profile/question?pageNumber=${pageInfo.firstPage}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    </#if>
+                    <#list pageInfo.navigatepageNums as page>
+                        <li><a href="/profile/question?pageNumber=${page}">${page}</a></li>
+                    </#list>
 
-<#--        </#list>-->
-<#--    </#if>-->
+                    <#if pageInfo.navigateLastPage!=pageInfo.pages>
+                        <li>
+                            <a href="/profile/question?pageNumber=${pageInfo.lastPage}" aria-label="Previous">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </#if>
+                </ul>
+            </nav>
+        </#if>
+
 </div>
 <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
     <h3>热门话题</h3>

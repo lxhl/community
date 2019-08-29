@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,9 +26,7 @@ public class PublishController {
         String title = question.getTitle();
         String tag = question.getTag();
         String description = question.getDescription();
-        model.addAttribute("title",title);
-        model.addAttribute("tag",tag);
-        model.addAttribute("description",description);
+        model.addAttribute("question",question);
         if(Strings.isEmpty(title)){
             model.addAttribute("error","title为空无法提交");
             return "/publish";
@@ -47,15 +46,26 @@ public class PublishController {
         question.setLikeCount(0);
         question.setGmtCreate(System.currentTimeMillis());
         question.setGmtModified(question.getGmtCreate());
-        questionMapper.insert(question);
-        model.addAttribute("title",null);
-        model.addAttribute("tag",null);
-        model.addAttribute("description",null);
-        model.addAttribute("success","发布成功");
+        if (question.getId()==null){
+            questionMapper.insert(question);
+            model.addAttribute("success","发布成功");
+        }else {
+            questionMapper.update(question);
+            model.addAttribute("success","更新成功");
+        }
+        model.addAttribute("question",null);
         return "/publish";
     }
     @GetMapping("/publish")
     public String toPublish(){
+        return "publish";
+    }
+
+    @GetMapping("/publish/{id}")
+    public String edit(@PathVariable(value = "id") String id,
+                       Model model){
+        Question question = questionMapper.selectById(Integer.parseInt(id));
+        model.addAttribute("question",question);
         return "publish";
     }
 }

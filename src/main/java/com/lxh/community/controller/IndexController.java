@@ -29,8 +29,8 @@ public class IndexController {
     @Autowired
     private QuestionDTOMapper questionDTOMapper;
     @GetMapping("/")
-    public String index(@RequestParam(value = "pageNumber",defaultValue = "1") String pageNumber,
-                        @RequestParam(value = "pageSize",defaultValue = "5") String pageSize,
+    public String index(@RequestParam(name = "pageNumber",defaultValue = "1") String pageNumber,
+                        @RequestParam(name = "pageSize",defaultValue = "5") String pageSize,
                         Model model){
         PageHelper.startPage(Integer.parseInt(pageNumber),Integer.parseInt(pageSize));
         PageInfo<QuestionDTO> pageInfo=new PageInfo<>(questionDTOMapper.selectList(),5);
